@@ -56,7 +56,7 @@ export default function Generator() {
     };
 
     const getLinkedInAccess = () => {
-        window.location.href = "https://season-brinier-refreshedly.ngrok-free.dev/api/linkedin/login";
+        window.location.href = `${API.defaults.baseURL}/linkedin/login`;
     };
 
     const postToLinkedIn = async () => {
