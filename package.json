@@ -1,0 +1,19 @@
+{
+  "name": "linkedin-post-generator",
+  "version": "1.0.0",
+  "description": "AI-powered LinkedIn post generator with authentication",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "build": "cd frontend && npm install && npm run build",
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "dev": "cd backend && npm run dev"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["linkedin", "ai", "post-generator", "mern"],
+  "author": "Your Name",
+  "license": "MIT"
+}
