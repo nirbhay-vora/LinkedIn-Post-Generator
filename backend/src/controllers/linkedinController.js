@@ -16,12 +16,14 @@ exports.linkedinCallback = async (req, res) => {
         const code = req.query.code;
         const error = req.query.error;
         
+        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+        
         if (error) {
-            return res.redirect(`http://localhost:5173?error=${error}`);
+            return res.redirect(`${frontendUrl}?error=${error}`);
         }
         
         if (!code) {
-            return res.redirect(`http://localhost:5173?error=no_code`);
+            return res.redirect(`${frontendUrl}?error=no_code`);
         }
 
         const tokenResponse = await axios.post(
@@ -41,10 +43,10 @@ exports.linkedinCallback = async (req, res) => {
         );
 
         const accessToken = tokenResponse.data.access_token;
-        res.redirect(`http://localhost:5173?accessToken=${accessToken}`);
+        res.redirect(`${frontendUrl}?accessToken=${accessToken}`);
     } catch (error) {
         console.error("OAuth Error:", error.response?.data);
-        res.redirect(`http://localhost:5173?error=oauth_failed`);
+        res.redirect(`${frontendUrl}?error=oauth_failed`);
     }
 };
 
