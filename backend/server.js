@@ -11,14 +11,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Serve static files from frontend build
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
 // Auth routes
 app.use("/api/auth", require("./src/routes/authRoutes"));
 
 // LinkedIn routes (OAuth handles its own auth)
 app.use("/api/linkedin", require("./src/routes/linkedinRoutes"));
+
+// Serve static files from frontend build (after API routes)
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // Direct AI endpoint using Groq (protected)
 app.post("/api/ai/generate", auth, async (req, res) => {
@@ -95,7 +95,7 @@ Requirements:
   }
 });
 
-// Catch all handler: send back React's index.html file for any non-API routes
+// Catch all handler: send back React's index.html file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
