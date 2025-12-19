@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 const dotenv = require("dotenv");
-const path = require("path");
 const { auth } = require("./middleware/auth");
 
 dotenv.config();
@@ -10,9 +9,6 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-
-// Serve static files from frontend build
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // Auth routes
 app.use("/api/auth", require("./src/routes/authRoutes"));
@@ -95,9 +91,9 @@ Requirements:
   }
 });
 
-// Catch all handler: send back React's index.html file for any non-API routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'LinkedIn Post Generator API is running!' });
 });
 
 const PORT = process.env.PORT || 5000;
