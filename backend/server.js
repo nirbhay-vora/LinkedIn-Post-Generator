@@ -8,12 +8,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: ["https://generate-post.netlify.app/", "http://localhost:3000"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 // Auth routes
 app.use("/api/auth", require("./src/routes/authRoutes"));
