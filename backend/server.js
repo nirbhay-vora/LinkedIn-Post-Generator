@@ -93,7 +93,15 @@ Requirements:
 
 // Health check
 app.get("/", (req, res) => {
-  res.json({ message: "LinkedIn Post Generator API is running!" });
+  res.json({ 
+    message: "LinkedIn Post Generator API is running!",
+    env: {
+      hasGroqKey: !!process.env.GROQ_API_KEY,
+      hasJwtSecret: !!process.env.JWT_SECRET,
+      hasAdminUsername: !!process.env.ADMIN_USERNAME,
+      hasAdminPassword: !!process.env.ADMIN_PASSWORD
+    }
+  });
 });
 
 const PORT = process.env.PORT || 5000;

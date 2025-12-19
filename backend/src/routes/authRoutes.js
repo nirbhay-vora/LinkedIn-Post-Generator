@@ -10,6 +10,10 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
 // Login endpoint
 router.post('/login', (req, res) => {
+    console.log('Login attempt:', req.body);
+    console.log('Expected username:', ADMIN_USERNAME);
+    console.log('Expected password:', ADMIN_PASSWORD);
+    
     const { username, password } = req.body;
     
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
@@ -19,8 +23,10 @@ router.post('/login', (req, res) => {
             { expiresIn: '24h' }
         );
         
+        console.log('Login successful, sending token');
         res.json({ token, message: 'Login successful' });
     } else {
+        console.log('Login failed - invalid credentials');
         res.status(401).json({ error: 'Invalid credentials' });
     }
 });
