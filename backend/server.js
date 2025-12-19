@@ -8,7 +8,12 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://generate-post.netlify.app/", "http://localhost:3000"],
+    credentials: true,
+  })
+);
 
 // Auth routes
 app.use("/api/auth", require("./src/routes/authRoutes"));
@@ -80,10 +85,10 @@ Requirements:
     console.log("Content generation completed");
 
     let aiText = contentResponse.data.choices[0].message.content;
-    
+
     // Remove markdown asterisks
-    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
-    
+    aiText = aiText.replace(/\*\*(.*?)\*\*/g, "$1");
+
     res.json({ content: aiText });
   } catch (error) {
     console.error("Full error:", error.response?.data || error.message);
@@ -92,8 +97,8 @@ Requirements:
 });
 
 // Health check
-app.get('/', (req, res) => {
-  res.json({ message: 'LinkedIn Post Generator API is running!' });
+app.get("/", (req, res) => {
+  res.json({ message: "LinkedIn Post Generator API is running!" });
 });
 
 const PORT = process.env.PORT || 5000;
