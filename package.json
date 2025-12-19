@@ -4,11 +4,11 @@
   "description": "AI-powered LinkedIn post generator with authentication",
   "main": "backend/server.js",
   "scripts": {
-    "start": "cd backend && npm start",
+    "start": "cd backend && node server.js",
     "build": "cd backend && npm install",
     "install-backend": "cd backend && npm install",
     "install-frontend": "cd frontend && npm install",
-    "dev": "cd backend && npm run dev"
+    "dev": "cd backend && node server.js"
   },
   "engines": {
     "node": ">=18.0.0"
